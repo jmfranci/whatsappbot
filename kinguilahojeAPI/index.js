@@ -23,5 +23,4 @@ getExchangeRate = (cb) => {
     cb({ EUR: euro, USD: dollar });
   })();
 };
-
 module.exports.getExchangeRate = getExchangeRate;

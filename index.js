@@ -2,6 +2,7 @@ const { Client } = require("whatsapp-web.js");
 const qrcode = require("qrcode-terminal");
 const { getExchangeRate } = require("./kinguilahojeAPI/index");
 const client = new Client();
+const CONSTANTS = require("./util/constants");
 
 client.on("qr", (qr) => {
   // Generate and scan this code with your phone
@@ -19,13 +20,13 @@ client.on("message", (msg) => {
   if (msg.body == "!ping") {
     msg.reply("pong");
   }
-  if (msg.body == "usd?") {
+  if (CONSTANTS.ASKING_DOLLAR.includes(msg.body)) {
     console.log("Mensagem recebida para usd");
     getExchangeRate((rates) => {
       msg.reply(`O dólar está à *${rates.USD}*`);
     });
   }
-  if (msg.body == "eur?") {
+  if (CONSTANTS.ASKING_EURO.includes(msg.body)) {
     console.log("Mensagem recebida para eur");
     getExchangeRate((rates) => {
       msg.reply(`O Euro está à *${rates.EUR}*`);
